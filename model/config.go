@@ -220,6 +220,14 @@ type LocalizationSettings struct {
 	AvailableLocales    *string
 }
 
+type SampleAppSettings struct {
+	Enable         *bool
+	AppUrl         *string
+	IconUrl        *string
+	AppName        *string
+	AppDisplayName *string
+}
+
 type Config struct {
 	ServiceSettings      ServiceSettings
 	TeamSettings         TeamSettings
@@ -235,6 +243,7 @@ type Config struct {
 	LdapSettings         LdapSettings
 	ComplianceSettings   ComplianceSettings
 	LocalizationSettings LocalizationSettings
+	SampleAppSettings    SampleAppSettings
 }
 
 func (o *Config) ToJson() string {
@@ -604,6 +613,29 @@ func (o *Config) SetDefaults() {
 	if o.LocalizationSettings.AvailableLocales == nil {
 		o.LocalizationSettings.AvailableLocales = new(string)
 		*o.LocalizationSettings.AvailableLocales = ""
+	}
+
+	if o.SampleAppSettings.Enable == nil {
+		o.SampleAppSettings.Enable = new(bool)
+		*o.SampleAppSettings.Enable = false
+	}
+
+	if !IsSafeLink(o.SampleAppSettings.AppUrl) {
+		*o.SampleAppSettings.AppUrl = ""
+	}
+
+	if !IsSafeLink(o.SampleAppSettings.IconUrl) {
+		*o.SampleAppSettings.IconUrl = ""
+	}
+
+	if o.SampleAppSettings.AppName == nil {
+		o.SampleAppSettings.AppName = new(string)
+		*o.SampleAppSettings.AppName = ""
+	}
+
+	if o.SampleAppSettings.AppDisplayName == nil {
+		o.SampleAppSettings.AppDisplayName = new(string)
+		*o.SampleAppSettings.AppDisplayName = ""
 	}
 }
 
