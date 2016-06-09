@@ -24,6 +24,7 @@ import EmailSettings from 'components/admin_console/email_settings.jsx';
 import PushSettings from 'components/admin_console/push_settings.jsx';
 import WebhookSettings from 'components/admin_console/webhook_settings.jsx';
 import ExternalServiceSettings from 'components/admin_console/external_service_settings.jsx';
+import SampleAppSettings from 'components/admin_console/sample_app_settings.jsx';
 import DatabaseSettings from 'components/admin_console/database_settings.jsx';
 import StorageSettings from 'components/admin_console/storage_settings.jsx';
 import ImageSettings from 'components/admin_console/image_settings.jsx';
@@ -134,6 +135,10 @@ export default (
             <Route
                 path='external'
                 component={ExternalServiceSettings}
+            />
+            <Route
+                path='app-center'
+                component={SampleAppSettings}
             />
         </Route>
         <Route path='files'>
