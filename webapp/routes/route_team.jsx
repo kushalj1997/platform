@@ -51,7 +51,7 @@ function doChannelChange(state, replace, callback) {
     callback();
 }
 
-function preNeedsTeam(nextState, replace, callback) {
+export function preNeedsTeam(nextState, replace, callback) {
     // First check to make sure you're in the current team
     // for the current url.
     var teamName = Utils.getTeamNameFromUrl();
@@ -118,7 +118,7 @@ function onPermalinkEnter(nextState) {
     GlobalActions.emitPostFocusEvent(postId);
 }
 
-export default [{
+export default {
     path: ':team',
     getComponents: (location, callback) => {
         System.import('components/needs_team.jsx').then(RouteUtils.importComponentSuccess(callback));
@@ -168,4 +168,4 @@ export default [{
             }
         }
     ]
-}];
+};
