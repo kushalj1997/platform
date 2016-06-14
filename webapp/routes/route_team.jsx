@@ -118,7 +118,7 @@ function onPermalinkEnter(nextState) {
     GlobalActions.emitPostFocusEvent(postId);
 }
 
-export default {
+export default [{
     path: ':team',
     getComponents: (location, callback) => {
         System.import('components/needs_team.jsx').then(RouteUtils.importComponentSuccess(callback));
@@ -168,4 +168,4 @@ export default {
             }
         }
     ]
-};
+}];
