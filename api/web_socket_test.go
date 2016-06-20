@@ -42,10 +42,10 @@ func TestSocket(t *testing.T) {
 
 	time.Sleep(300 * time.Millisecond)
 
-	var rmsg model.Message
+	var rmsg model.WebSocketMessage
 
 	// Test sending message without a channelId
-	m := model.NewMessage(team.Id, "", "", model.ACTION_TYPING)
+	m := model.NewWebSocketEvent(team.Id, "", "", model.EVENT_TYPING)
 	m.Add("RootId", model.NewId())
 	m.Add("ParentId", model.NewId())
 
@@ -66,7 +66,7 @@ func TestSocket(t *testing.T) {
 	}
 
 	// Test sending messsage to Channel you have access to
-	m = model.NewMessage(team.Id, channel1.Id, "", model.ACTION_TYPING)
+	m = model.NewWebSocketEvent(team.Id, channel1.Id, "", model.EVENT_TYPING)
 	m.Add("RootId", model.NewId())
 	m.Add("ParentId", model.NewId())
 
@@ -85,7 +85,7 @@ func TestSocket(t *testing.T) {
 	}
 
 	// Test sending message to Channel you *do not* have access too
-	m = model.NewMessage("", channel2.Id, "", model.ACTION_TYPING)
+	m = model.NewWebSocketEvent("", channel2.Id, "", model.EVENT_TYPING)
 	m.Add("RootId", model.NewId())
 	m.Add("ParentId", model.NewId())
 

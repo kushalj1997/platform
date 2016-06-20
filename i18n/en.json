@@ -556,6 +556,10 @@
     "translation": "%v:%v code=%v rid=%v uid=%v ip=%v %v [details: %v]"
   },
   {
+    "id": "api.web_socket_router.log.error",
+    "translation": "websocket: seq=%v uid=%v %v [details: %v]"
+  },
+  {
     "id": "api.context.permissions.app_error",
     "translation": "You do not have the appropriate permissions"
   },

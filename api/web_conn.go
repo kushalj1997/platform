@@ -22,7 +22,7 @@ const (
 
 type WebConn struct {
 	WebSocket               *websocket.Conn
-	Send                    chan *model.Message
+	Send                    chan model.WebSocketMessage
 	SessionToken            string
 	UserId                  string
 	hasPermissionsToChannel map[string]bool
@@ -44,7 +44,7 @@ func NewWebConn(ws *websocket.Conn, userId string, sessionToken string) *WebConn
 	}()
 
 	return &WebConn{
-		Send:                    make(chan *model.Message, 64),
+		Send:                    make(chan model.WebSocketMessage, 64),
 		WebSocket:               ws,
 		UserId:                  userId,
 		SessionToken:            sessionToken,
@@ -73,12 +73,11 @@ func (c *WebConn) readPump() {
 	})
 
 	for {
-		var msg model.Message
-		if err := c.WebSocket.ReadJSON(&msg); err != nil {
+		var req model.WebSocketRequest
+		if err := c.WebSocket.ReadJSON(&req); err != nil {
 			return
 		} else {
-			msg.UserId = c.UserId
-			go Publish(&msg)
+			l4g.Debug(req.ToJson())
 		}
 	}
 }

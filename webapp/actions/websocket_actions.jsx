@@ -171,6 +171,8 @@ export function sendMessage(msg) {
     }
 }
 
+global.window.sendMessage = sendMessage;
+
 export function close() {
     manuallyClosed = true;
     connectFailCount = 0;
