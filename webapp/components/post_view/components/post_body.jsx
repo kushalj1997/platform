@@ -95,7 +95,7 @@ export default class PostBody extends React.Component {
                     <span>
                         <FormattedMessage
                             id='post_body.commentedOn'
-                            defaultMessage='Commented on {name}{apostrophe} message: '
+                            defaultMessage='Replied to {name}{apostrophe} message: '
                             values={{
                                 name,
                                 apostrophe
