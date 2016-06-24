@@ -31,11 +31,11 @@ const holders = defineMessages({
     },
     comment: {
         id: 'create_comment.comment',
-        defaultMessage: 'Add Comment'
+        defaultMessage: 'Add Reply'
     },
     addComment: {
         id: 'create_comment.addComment',
-        defaultMessage: 'Add a comment...'
+        defaultMessage: 'Add a reply...'
     },
     commentTitle: {
         id: 'create_comment.commentTitle',
