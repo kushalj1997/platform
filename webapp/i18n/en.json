@@ -1101,7 +1101,7 @@
   "permalink.error.access": "Permalink belongs to a channel you do not have access to",
   "post_attachment.collapse": "Show less...",
   "post_attachment.more": "Show more...",
-  "post_body.commentedOn": "Commented on {name}{apostrophe} message: ",
+  "post_body.commentedOn": "Replied to {name}{apostrophe} message: ",
   "post_body.deleted": "(message deleted)",
   "post_body.plusMore": " plus {count} other files",
   "post_body.plusOne": " plus 1 other file",
