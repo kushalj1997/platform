@@ -14,6 +14,12 @@ type WebSocketRouter struct {
 	handlers map[string]*webSocketHandler
 }
 
+func NewWebSocketRouter() *WebSocketRouter {
+	router := &WebSocketRouter{}
+	router.handlers = make(map[string]*webSocketHandler)
+	return router
+}
+
 func (wr *WebSocketRouter) Handle(action string, handler *webSocketHandler) {
 	wr.handlers[action] = handler
 }

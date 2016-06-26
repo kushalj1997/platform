@@ -74,8 +74,8 @@ func (m *WebSocketResponse) Add(key string, value interface{}) {
 	m.Data[key] = value
 }
 
-func NewWebSocketResponse(status string, seqReply int64) *WebSocketResponse {
-	return &WebSocketResponse{Status: status, SeqReply: seqReply, Data: make(map[string]interface{})}
+func NewWebSocketResponse(status string, seqReply int64, data map[string]interface{}) *WebSocketResponse {
+	return &WebSocketResponse{Status: status, SeqReply: seqReply, Data: data}
 }
 
 func (o *WebSocketResponse) ToJson() string {

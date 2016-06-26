@@ -1,4 +1,4 @@
-// Copyright (c) 2015 Mattermost, Inc. All Rights Reserved.
+// Copyright (c) 2016 Mattermost, Inc. All Rights Reserved.
 // See License.txt for license information.
 
 package model
@@ -6,12 +6,20 @@ package model
 import (
 	"encoding/json"
 	"io"
+
+	goi18n "github.com/nicksnyder/go-i18n/i18n"
 )
 
 type WebSocketRequest struct {
+	// Client-provided fields
 	Seq    int64                  `json:"seq"`
 	Action string                 `json:"action"`
 	Data   map[string]interface{} `json:"data"`
+
+	// Server-provided fields
+	Session Session
+	T       goi18n.TranslateFunc
+	Locale  string
 }
 
 func (o *WebSocketRequest) ToJson() string {

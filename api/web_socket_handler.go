@@ -5,30 +5,34 @@ package api
 
 import (
 	l4g "github.com/alecthomas/log4go"
-	goi18n "github.com/nicksnyder/go-i18n/i18n"
 
 	"github.com/mattermost/platform/model"
 	"github.com/mattermost/platform/utils"
 )
 
-type WebSocketContext struct {
-	Session model.Session
-	Seq     int64
-	Conn    *WebConn
-	Action  string
-	Err     *model.AppError
-	T       goi18n.TranslateFunc
-	Locale  string
-}
-
-func ApiWebSocketHandler(wh func(*WebConn, *model.WebSocketRequest)) *webSocketHandler {
+func ApiWebSocketHandler(wh func(*model.WebSocketRequest, map[string]interface{}) *model.AppError) *webSocketHandler {
 	return &webSocketHandler{wh}
 }
 
 type webSocketHandler struct {
-	handlerFunc func(*WebConn, *model.WebSocketRequest)
+	handlerFunc func(*model.WebSocketRequest, map[string]interface{}) *model.AppError
 }
 
 func (wh *webSocketHandler) ServeWebSocket(conn *WebConn, r *model.WebSocketRequest) {
-	l4g.Debug(utils.T("websocket request: %v"), r.Action)
+	l4g.Debug("/api/v3/users/websocket:%s", r.Action)
+
+	r.Session = *GetSession(conn.SessionToken)
+	r.T = conn.T
+	r.Locale = conn.Locale
+
+	data := make(map[string]interface{})
+
+	if err := wh.handlerFunc(r, data); err != nil {
+		l4g.Error(utils.T("api.web_socket_handler.log.error"), "/api/v3/users/websocket", r.Action, r.Seq, r.Session.UserId, err.SystemMessage(utils.T), err.DetailedError)
+		err.DetailedError = ""
+		conn.Send <- model.NewWebSocketError(r.Seq, err)
+		return
+	}
+
+	conn.Send <- model.NewWebSocketResponse(model.STATUS_OK, r.Seq, data)
 }
