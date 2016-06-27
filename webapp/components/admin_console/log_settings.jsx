@@ -68,7 +68,7 @@ export default class LogSettings extends AdminSettings {
                     label={
                         <FormattedMessage
                             id='admin.log.consoleTitle'
-                            defaultMessage='Output Logs to Console: '
+                            defaultMessage='Output logs to console: '
                         />
                     }
                     helpText={
@@ -104,7 +104,7 @@ export default class LogSettings extends AdminSettings {
                     label={
                         <FormattedMessage
                             id='admin.log.fileTitle'
-                            defaultMessage='Output Logs to File: '
+                            defaultMessage='Output logs to file: '
                         />
                     }
                     helpText={
