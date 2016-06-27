@@ -107,7 +107,7 @@ export default class WebhookSettings extends AdminSettings {
                     label={
                         <FormattedMessage
                             id='admin.service.integrationAdmin'
-                            defaultMessage='Restrict Integrations to Admins: '
+                            defaultMessage='Restrict creating integrations to Team and System Admins: '
                         />
                     }
                     helpText={
@@ -124,7 +124,7 @@ export default class WebhookSettings extends AdminSettings {
                     label={
                         <FormattedMessage
                             id='admin.service.overrideTitle'
-                            defaultMessage='Enable Integrations to Override Usernames: '
+                            defaultMessage='Enable integrations to override usernames: '
                         />
                     }
                     helpText={
@@ -141,7 +141,7 @@ export default class WebhookSettings extends AdminSettings {
                     label={
                         <FormattedMessage
                             id='admin.service.iconTitle'
-                            defaultMessage='Enable Integrations to Override Icons: '
+                            defaultMessage='Enable integrations to override icons: '
                         />
                     }
                     helpText={
