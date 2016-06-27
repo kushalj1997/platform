@@ -40,6 +40,14 @@ export function initialize() {
     }
 }
 
+export function sendMessage(msg) {
+    webSocketClient.sendMessage(msg);
+}
+
+export function close() {
+    webSocketClient.close();
+}
+
 function handleReconnect() {
     AsyncClient.getChannels();
     AsyncClient.getPosts(ChannelStore.getCurrentId());
@@ -57,7 +65,7 @@ function handleClose(failCount) {
 }
 
 function handleEvent(msg) {
-    switch (msg.action) {
+    switch (msg.event) {
     case SocketEvents.POSTED:
     case SocketEvents.EPHEMERAL_MESSAGE:
         handleNewPostEvent(msg);
@@ -107,27 +115,14 @@ function handleEvent(msg) {
     }
 }
 
-export function sendMessage(msg) {
-    var teamId = TeamStore.getCurrentId();
-    if (teamId && teamId.length > 0) {
-        msg.team_id = teamId;
-    }
-
-    webSocketClient.sendMessage(msg);
-}
-
-export function close() {
-    webSocketClient.close();
-}
-
 function handleNewPostEvent(msg) {
-    const post = JSON.parse(msg.props.post);
+    const post = JSON.parse(msg.data.post);
     GlobalActions.emitPostRecievedEvent(post, msg);
 }
 
 function handlePostEditEvent(msg) {
     // Store post
-    const post = JSON.parse(msg.props.post);
+    const post = JSON.parse(msg.data.post);
     PostStore.storePost(post);
     PostStore.emitChange();
 
@@ -140,7 +135,7 @@ function handlePostEditEvent(msg) {
 }
 
 function handlePostDeleteEvent(msg) {
-    const post = JSON.parse(msg.props.post);
+    const post = JSON.parse(msg.data.post);
     GlobalActions.emitPostDeletedEvent(post);
 }
 
@@ -169,12 +164,12 @@ function handleUserRemovedEvent(msg) {
     if (UserStore.getCurrentId() === msg.user_id) {
         AsyncClient.getChannels();
 
-        if (msg.props.remover_id !== msg.user_id &&
+        if (msg.data.remover_id !== msg.user_id &&
                 msg.channel_id === ChannelStore.getCurrentId() &&
                 $('#removed_from_channel').length > 0) {
             var sentState = {};
             sentState.channelName = ChannelStore.getCurrent().display_name;
-            sentState.remover = UserStore.getProfile(msg.props.remover_id).username;
+            sentState.remover = UserStore.getProfile(msg.data.remover_id).username;
 
             BrowserStore.setItem('channel-removed-state', sentState);
             $('#removed_from_channel').modal('show');
@@ -202,12 +197,12 @@ function handleChannelDeletedEvent(msg) {
 }
 
 function handlePreferenceChangedEvent(msg) {
-    const preference = JSON.parse(msg.props.preference);
+    const preference = JSON.parse(msg.data.preference);
     GlobalActions.emitPreferenceChangedEvent(preference);
 }
 
 function handleUserTypingEvent(msg) {
     if (TeamStore.getCurrentId() === msg.team_id) {
-        GlobalActions.emitRemoteUserTypingEvent(msg.channel_id, msg.user_id, msg.props.parent_id);
+        GlobalActions.emitRemoteUserTypingEvent(msg.channel_id, msg.user_id, msg.data.parent_id);
     }
 }

@@ -36,3 +36,7 @@ func (wh *webSocketHandler) ServeWebSocket(conn *WebConn, r *model.WebSocketRequ
 
 	conn.Send <- model.NewWebSocketResponse(model.STATUS_OK, r.Seq, data)
 }
+
+func NewInvalidWebSocketParamError(action string, name string) *model.AppError {
+	return model.NewLocAppError("/api/v3/users/websocket:"+action, "api.websocket_handler.invalid_param.app_error", map[string]interface{}{"Name": name}, "")
+}

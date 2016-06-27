@@ -443,8 +443,9 @@ export function viewLoggedIn() {
 var lastTimeTypingSent = 0;
 export function emitLocalUserTypingEvent(channelId, parentId) {
     const t = Date.now();
+    const teamId = TeamStore.getCurrentId();
     if ((t - lastTimeTypingSent) > Constants.UPDATE_TYPING_MS) {
-        Websockets.sendMessage({channel_id: channelId, action: 'typing', props: {parent_id: parentId}, state: {}});
+        Websockets.sendMessage({action: 'user_typing', data: {parent_id: parentId, channel_id: channelId, team_id: teamId}});
         lastTimeTypingSent = t;
     }
 }

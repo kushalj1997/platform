@@ -71,6 +71,8 @@ func InitUser() {
 	BaseRoutes.NeedUser.Handle("/sessions", ApiUserRequired(getSessions)).Methods("GET")
 	BaseRoutes.NeedUser.Handle("/audits", ApiUserRequired(getAudits)).Methods("GET")
 	BaseRoutes.NeedUser.Handle("/image", ApiUserRequiredTrustRequester(getProfileImage)).Methods("GET")
+
+	BaseRoutes.WebSocket.Handle("user_typing", ApiWebSocketHandler(userTyping))
 }
 
 func createUser(c *Context, w http.ResponseWriter, r *http.Request) {
@@ -2416,4 +2418,23 @@ func checkMfa(c *Context, w http.ResponseWriter, r *http.Request) {
 		rdata["mfa_required"] = strconv.FormatBool(result.Data.(*model.User).MfaActive)
 	}
 	w.Write([]byte(model.MapToJson(rdata)))
+}
+
+func userTyping(req *model.WebSocketRequest, responseData map[string]interface{}) (err *model.AppError) {
+	var ok bool
+	var teamId string
+	if teamId, ok = req.Data["team_id"].(string); !ok || len(teamId) == 0 {
+		return NewInvalidWebSocketParamError(req.Action, "team_id")
+	}
+
+	var channelId string
+	if channelId, ok = req.Data["channel_id"].(string); !ok || len(channelId) == 0 {
+		return NewInvalidWebSocketParamError(req.Action, "channel_id")
+	}
+
+	event := model.NewWebSocketEvent(teamId, channelId, req.Session.UserId, model.EVENT_TYPING)
+	event.Add("parent_id", "")
+	go Publish(event)
+
+	return nil
 }
