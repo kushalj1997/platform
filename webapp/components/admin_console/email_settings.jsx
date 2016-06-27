@@ -86,7 +86,7 @@ export default class EmailSettings extends AdminSettings {
                     label={
                         <FormattedMessage
                             id='admin.email.notificationDisplayTitle'
-                            defaultMessage='Email Notification Display Name:'
+                            defaultMessage='Notification Display Name:'
                         />
                     }
                     placeholder={Utils.localizeMessage('admin.email.notificationDisplayExample', 'Ex: "Mattermost Notification", "System", "No-Reply"')}
@@ -105,7 +105,7 @@ export default class EmailSettings extends AdminSettings {
                     label={
                         <FormattedMessage
                             id='admin.email.notificationEmailTitle'
-                            defaultMessage='Email Notification Address:'
+                            defaultMessage='Notification From Address:'
                         />
                     }
                     placeholder={Utils.localizeMessage('admin.email.notificationEmailExample', 'Ex: "mattermost@yourcompany.com", "admin@yourcompany.com"')}
@@ -124,7 +124,7 @@ export default class EmailSettings extends AdminSettings {
                     label={
                         <FormattedMessage
                             id='admin.email.notificationOrganization'
-                            defaultMessage='Email Notification Footer Address:'
+                            defaultMessage='Notification Footer Mailing Address:'
                         />
                     }
                     placeholder={Utils.localizeMessage('admin.email.notificationOrganizationExample', 'Ex: "© ABC Corporation, 565 Knight Way, Palo Alto, California, 94305, USA"')}
