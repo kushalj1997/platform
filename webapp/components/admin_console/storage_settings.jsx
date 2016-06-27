@@ -90,6 +90,14 @@ export default class StorageSettings extends AdminSettings {
                             defaultMessage='File Storage System:'
                         />
                     }
+                    helpText={
+                        <FormattedMessage
+                            id='admin.image.storageDescription'
+                            defaultMessage='Storage system where files and image attachments are saved.<br /><br />
+                            Selecting "Amazon S3" will enable fields to enter your Amazon credentials and bucket details.<br /><br />
+                            Selecting "Local File System" will enable the field to specify a local file directory.
+                        />
+                    }
                     value={this.state.driverName}
                     onChange={this.handleChange}
                 />
@@ -105,7 +113,7 @@ export default class StorageSettings extends AdminSettings {
                     helpText={
                         <FormattedMessage
                             id='admin.image.localDescription'
-                            defaultMessage='Directory to which image files are written. If blank, will be set to ./data/.'
+                            defaultMessage='Directory to which files and images are written. If blank, will be set to ./data/.'
                         />
                     }
                     value={this.state.directory}
