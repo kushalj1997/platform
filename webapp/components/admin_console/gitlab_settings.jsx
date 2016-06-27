@@ -59,7 +59,7 @@ export default class GitLabSettings extends AdminSettings {
                     label={
                         <FormattedMessage
                             id='admin.gitlab.enableTitle'
-                            defaultMessage='Enable Account Creation with GitLab: '
+                            defaultMessage='Enable account creation with GitLab: '
                         />
                     }
                     helpText={
