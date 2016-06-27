@@ -11,7 +11,7 @@ import ErrorStore from 'stores/error_store.jsx';
 import NotificationStore from 'stores/notification_store.jsx'; //eslint-disable-line no-unused-vars
 
 import Client from 'utils/web_client.jsx';
-import WebSocketClient from 'mattermost/websocket_client.jsx';
+import WebSocketClient from 'utils/websocket_client.jsx';
 import * as Utils from 'utils/utils.jsx';
 import * as AsyncClient from 'utils/async_client.jsx';
 import * as GlobalActions from 'actions/global_actions.jsx';
@@ -22,7 +22,6 @@ const SocketEvents = Constants.SocketEvents;
 import {browserHistory} from 'react-router/es6';
 
 const MAX_WEBSOCKET_FAILS = 7;
-const webSocketClient = new WebSocketClient();
 
 export function initialize() {
     if (window.WebSocket) {
@@ -33,19 +32,15 @@ export function initialize() {
 
         const connUrl = protocol + location.host + ((/:\d+/).test(location.host) ? '' : Utils.getWebsocketPort(protocol)) + Client.getUsersRoute() + '/websocket';
 
-        webSocketClient.initialize(connUrl);
-        webSocketClient.setEventCallback(handleEvent);
-        webSocketClient.setReconnectCallback(handleReconnect);
-        webSocketClient.setCloseCallback(handleClose);
+        WebSocketClient.initialize(connUrl);
+        WebSocketClient.setEventCallback(handleEvent);
+        WebSocketClient.setReconnectCallback(handleReconnect);
+        WebSocketClient.setCloseCallback(handleClose);
     }
 }
 
-export function sendMessage(msg) {
-    webSocketClient.sendMessage(msg);
-}
-
 export function close() {
-    webSocketClient.close();
+    WebSocketClient.close();
 }
 
 function handleReconnect() {

@@ -14,6 +14,7 @@ import Constants from 'utils/constants.jsx';
 const ActionTypes = Constants.ActionTypes;
 import * as AsyncClient from 'utils/async_client.jsx';
 import Client from 'utils/web_client.jsx';
+import WebSocketClient from 'utils/websocket_client.jsx';
 import * as Utils from 'utils/utils.jsx';
 import * as Websockets from './websocket_actions.jsx';
 import * as I18n from 'i18n/i18n.jsx';
@@ -445,7 +446,7 @@ export function emitLocalUserTypingEvent(channelId, parentId) {
     const t = Date.now();
     const teamId = TeamStore.getCurrentId();
     if ((t - lastTimeTypingSent) > Constants.UPDATE_TYPING_MS) {
-        Websockets.sendMessage({action: 'user_typing', data: {parent_id: parentId, channel_id: channelId, team_id: teamId}});
+        WebSocketClient.userTyping(teamId, channelId, parentId);
         lastTimeTypingSent = t;
     }
 }

@@ -2420,7 +2420,7 @@ func checkMfa(c *Context, w http.ResponseWriter, r *http.Request) {
 	w.Write([]byte(model.MapToJson(rdata)))
 }
 
-func userTyping(req *model.WebSocketRequest, responseData map[string]interface{}) (err *model.AppError) {
+func userTyping(req *model.WebSocketRequest, responseData map[string]interface{}) *model.AppError {
 	var ok bool
 	var teamId string
 	if teamId, ok = req.Data["team_id"].(string); !ok || len(teamId) == 0 {
