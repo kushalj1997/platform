@@ -106,7 +106,7 @@ export default class StorageSettings extends AdminSettings {
                     label={
                         <FormattedMessage
                             id='admin.image.localTitle'
-                            defaultMessage='Local File Directory:'
+                            defaultMessage='Local Storage Directory:'
                         />
                     }
                     placeholder={Utils.localizeMessage('admin.image.localExample', 'Ex "./data/"')}
