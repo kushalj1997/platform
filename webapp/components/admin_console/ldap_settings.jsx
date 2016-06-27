@@ -89,7 +89,7 @@ export default class LdapSettings extends AdminSettings {
                     label={
                         <FormattedMessage
                             id='admin.ldap.enableTitle'
-                            defaultMessage='Enable Login with LDAP:'
+                            defaultMessage='Enable login with LDAP:'
                         />
                     }
                     helpText={
