@@ -82,7 +82,7 @@ export default class RateSettings extends AdminSettings {
                     label={
                         <FormattedMessage
                             id='admin.rate.queriesTitle'
-                            defaultMessage='Queries Per Second:'
+                            defaultMessage='Maximum Queries per Second:'
                         />
                     }
                     placeholder={Utils.localizeMessage('admin.rate.queriesExample', 'Ex "10"')}
@@ -120,7 +120,7 @@ export default class RateSettings extends AdminSettings {
                     label={
                         <FormattedMessage
                             id='admin.rate.remoteTitle'
-                            defaultMessage='Limit by Remote Address: '
+                            defaultMessage='Vary limit by remote address: '
                         />
                     }
                     helpText={
@@ -138,7 +138,7 @@ export default class RateSettings extends AdminSettings {
                     label={
                         <FormattedMessage
                             id='admin.rate.httpHeaderTitle'
-                            defaultMessage='Limit by HTTP Header:'
+                            defaultMessage='Vary limit by HTTP header:'
                         />
                     }
                     placeholder={Utils.localizeMessage('admin.rate.httpHeaderExample', 'Ex "X-Real-IP", "X-Forwarded-For"')}
