@@ -860,6 +860,16 @@ func (c *Client) GetSystemAnalytics(name string) (*Result, *AppError) {
 	}
 }
 
+func (c *Client) LdapSyncNow() (*Result, *AppError) {
+	if r, err := c.DoApiPost("/admin/ldap_sync_now", ""); err != nil {
+		return nil, err
+	} else {
+		defer closeBody(r)
+		return &Result{r.Header.Get(HEADER_REQUEST_ID),
+			r.Header.Get(HEADER_ETAG_SERVER), MapFromJson(r.Body)}, nil
+	}
+}
+
 func (c *Client) CreateChannel(channel *Channel) (*Result, *AppError) {
 	if r, err := c.DoApiPost(c.GetTeamRoute()+"/channels/create", channel.ToJson()); err != nil {
 		return nil, err
