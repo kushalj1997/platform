@@ -51,7 +51,7 @@ export default class ConnectionSettings extends AdminSettings {
                     label={
                         <FormattedMessage
                             id='admin.service.corsTitle'
-                            defaultMessage='Enable Cross-Origin Requests:'
+                            defaultMessage='Enable cross-origin requests from:'
                         />
                     }
                     placeholder={Utils.localizeMessage('admin.service.corsEx', 'http://example.com')}
