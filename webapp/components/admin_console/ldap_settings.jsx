@@ -337,7 +337,7 @@ export default class LdapSettings extends AdminSettings {
                     label={
                         <FormattedMessage
                             id='admin.ldap.syncIntervalTitle'
-                            defaultMessage='Synchronization Interval (Minutes)'
+                            defaultMessage='Synchronization Interval (minutes)'
                         />
                     }
                     helpText={
