@@ -115,7 +115,7 @@ export default class UsersAndTeamsSettings extends AdminSettings {
                     label={
                         <FormattedMessage
                             id='admin.team.restrictTitle'
-                            defaultMessage='Restrict Email Domains:'
+                            defaultMessage='Restrict account creation to specified email domains:'
                         />
                     }
                     placeholder={Utils.localizeMessage('admin.team.restrictExample', 'Ex "corp.mattermost.com, mattermost.org"')}
