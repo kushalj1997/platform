@@ -372,7 +372,7 @@ export default class LdapSettings extends AdminSettings {
                     label={
                         <FormattedMessage
                             id='admin.ldap.queryTitle'
-                            defaultMessage='Query Timeout (Seconds):'
+                            defaultMessage='Query Timeout (seconds):'
                         />
                     }
                     placeholder={Utils.localizeMessage('admin.ldap.queryEx', 'Ex "60"')}
