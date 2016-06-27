@@ -17,9 +17,9 @@ type WebSocketRequest struct {
 	Data   map[string]interface{} `json:"data"`
 
 	// Server-provided fields
-	Session Session
-	T       goi18n.TranslateFunc
-	Locale  string
+	Session Session              `json:"-"`
+	T       goi18n.TranslateFunc `json:"-"`
+	Locale  string               `json:"-"`
 }
 
 func (o *WebSocketRequest) ToJson() string {

@@ -4,15 +4,38 @@
 package api
 
 import (
-	"github.com/gorilla/websocket"
-	"github.com/mattermost/platform/model"
-	"github.com/mattermost/platform/utils"
-	"net/http"
 	"testing"
 	"time"
 )
 
-func TestSocket(t *testing.T) {
+func TestWebSocket(t *testing.T) {
+	th := Setup().InitBasic()
+	//Client := th.BasicClient
+	WebSocketClient, err := th.CreateWebSocketClient()
+	if err != nil {
+		t.Fatal(err)
+	}
+	defer WebSocketClient.Close()
+
+	time.Sleep(300 * time.Millisecond)
+
+	// Test closing and reconnecting
+	WebSocketClient.Close()
+	if err := WebSocketClient.Connect(); err != nil {
+		t.Fatal(err)
+	}
+
+	WebSocketClient.Listen()
+	WebSocketClient.SendMessage("ping", nil)
+
+	time.Sleep(300 * time.Millisecond)
+
+	if resp := <-WebSocketClient.ResponseChannel; resp.Data["text"].(string) != "pong" {
+		t.Fatal("wrong response")
+	}
+}
+
+/*func TestSocket(t *testing.T) {
 	th := Setup().InitBasic()
 	Client := th.BasicClient
 	team := th.BasicTeam
@@ -100,4 +123,4 @@ func TestSocket(t *testing.T) {
 	}()
 
 	time.Sleep(2 * time.Second)
-}
+}*/
